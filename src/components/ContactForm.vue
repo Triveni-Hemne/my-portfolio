@@ -58,8 +58,7 @@
       <p v-if="submitted" class=" drop-shadow text-green-600 text-left mt-8 text-lg animate-fade-in fixed top-20 right-2 rounded bg-blue-100 p-5">
         ✅ Thank you! <br> I’ll get back to you soon.
       </p>
-      <!-- <p v-if="successMessage" class=" drop-shadow text-green-600 text-left mt-8 text-lg animate-fade-in fixed top-20 right-2 rounded bg-blue-100 p-5">{{ successMessage }}</p> -->
-    <p v-if="errorMessage" class=" drop-shadow text-green-600 text-left mt-8 text-lg animate-fade-in fixed top-20 right-2 rounded bg-blue-100 p-5">{{ errorMessage }}</p>
+    
     </div>
     </div>
   </section>
@@ -78,26 +77,15 @@ export default {
         email: '',
         message: ''
       },
-      successMessage: '', // ✅ Added
-      errorMessage: '',   // ✅ Added
+     
       submitted: false
     }
   },
   methods: {
-    async submitForm() {
-      try {
-        let response = await axios.post('/contact', this.form)
-
-        this.successMessage = response.data.message || 'Message sent successfully!'
-        this.errorMessage = ''
-        this.form = { name: '', email: '', message: '' } // ✅ Reset
+   submitForm() {
+    
         this.submitted = true
-      } catch (error) {
-        this.errorMessage = error.response?.data?.message || 'Something went wrong.'
-        this.successMessage = ''
-      }
-
-      // ✅ Hide messages after 3 seconds
+     
       setTimeout(() => {
         this.submitted = false
         this.successMessage = ''
