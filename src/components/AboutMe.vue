@@ -5,7 +5,7 @@
       <!-- Image or Avatar -->
       <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-cyan-600 shadow-md">
         <img
-          :src="('../assets/images/profile.png')"
+          :src="profileImg"
           alt="Your Profile"
           class="w-full h-full object-cover"
         />
@@ -35,11 +35,16 @@
 
 <script>
 import ResumeBtn from './ResumeDownload.vue'
-
+import profileImg from '@/assets/images/profile.png'
 export default {
   name: 'AboutMe',
   components: { 
     ResumeBtn,
-   }
+   },
+   data() {
+    return {
+      profileImg // ✅ expose to template
+    }
+  }
 }
 </script>

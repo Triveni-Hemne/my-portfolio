@@ -1,18 +1,33 @@
 <template>
   <section id="experience" class="bg-white py-16 px-4">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-deepblue text-center mb-10">Experience</h2>
-    <div class="text-center mb-12">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-deepblue text-center mb-10">
+      Experience
+    </h2>
+
+    <!-- Loop through all experiences -->
+    <div 
+      v-for="(experience, expIndex) in experiences" 
+      :key="experience.role + expIndex" 
+      class="mb-16"
+    >
+
+      <!-- Title -->
+      <div class="text-center mb-12">
         <h3 class="text-2xl font-semibold text-deepblue">
-          {{ experiences[0].role }}
+          {{ experience.role }}
         </h3>
-        <p class="text-lg text-sky-dark">@ {{ experiences[0].company }}</p>
+        <p class="text-lg text-sky-dark">
+          @ {{ experience.company }} ({{ experience.period }})
+        </p>
       </div>
+
+      <!-- Timeline -->
       <div class="relative border-l-4 border-sky-dark pl-6 space-y-10">
 
         <div 
-          v-for="(exp, index) in experiences[0].details" 
-          :key="index" 
+          v-for="(exp, index) in experience.details" 
+          :key="exp.heading"
           class="relative group flex items-center gap-8"
           :class="index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'"
         >
@@ -20,8 +35,8 @@
           <span class="absolute -left-[20px] top-6 w-4 h-4 rounded-full bg-sky-dark border-5 border-sky-500"></span>
 
           <!-- Image -->
-          <div class="w-1/4">
-            <img :src="exp.image" alt="experience image" class="rounded-lg shadow-lg" />
+          <div class="w-1/4" v-if="exp.image">
+            <img :src="exp.image" class="rounded-lg shadow-lg" />
           </div>
 
           <!-- Content -->
@@ -29,14 +44,16 @@
             <h4 class="font-semibold text-sky-dark text-lg mb-1">
               {{ exp.heading }}
             </h4>
-            <!-- Toggle Button (only on mobile) -->
+
+            <!-- Toggle -->
             <button 
-              @click="togglePoints(index)"
+              @click="togglePoints(expIndex, index)"
               class="md:hidden text-cyan-600 font-medium mb-2"
             >
-              {{ showPoints === index ? 'Hide Details' : 'Show Details' }}
+              {{ openIndex === expIndex + '-' + index ? 'Hide Details' : 'Show Details' }}
             </button>
-            <!-- Points List -->
+
+            <!-- Points -->
             <transition
               enter-active-class="transition-all duration-500 ease-in-out"
               leave-active-class="transition-all duration-500 ease-in-out"
@@ -45,47 +62,78 @@
               leave-from-class="max-h-screen opacity-100"
               leave-to-class="max-h-0 opacity-0"
             >
-            <ul v-show="isDesktop || openIndex === index"
-              class="list-disc list-inside text-slate-700 space-y-1 pl-4 overflow-hidden"
-            >
-              <li v-for="(point, pIndex) in exp.points" :key="pIndex">
-                {{ point }}
-              </li>
-            </ul>
+              <ul 
+                v-show="isDesktop || openIndex === expIndex + '-' + index"
+                class="list-disc list-inside text-slate-700 space-y-1 pl-4 overflow-hidden"
+              >
+                <li v-for="(point, pIndex) in exp.points" :key="pIndex">
+                  {{ point }}
+                </li>
+              </ul>
             </transition>
           </div>
+
         </div>
 
       </div>
     </div>
-  </section>
+  </div>
+</section>
 </template>
 
 <script>
+import img0 from '@/assets/images/experience-image0.png'
+import img1 from '@/assets/images/experience-image1.webp'
+import img2 from '@/assets/images/experience-image2.webp'
+import img3 from '@/assets/images/experience-image3.webp'
+import img4 from '@/assets/images/experience-image4.webp'
+import img5 from '@/assets/images/experience-image5.webp'
 export default {
   name: 'ExperienceSection',
   props: ['exp'], 
   data() {
     return {
       experiences: [
+        {    
+          role: "Independent Developer",
+          company: "Self Learning & Personal Projects",
+          period: "2025 – Present",
+          details: [
+            {
+              heading: "🚀 Full Stack Development & Modern Technologies",
+              points: [
+                "Built Mini Bank System using Laravel, Vue 3, Inertia.js, Tailwind CSS, and Sanctum.",
+                "Designed modules for account management, transactions, and financial reporting.",
+                "Implemented authentication and secure API handling using Laravel Sanctum.",
+                "Developed interactive dashboards with Chart.js for data visualization.",
+                "Built personal portfolio using Vue.js with reusable components and modern UI.",
+                "Worked on freelance projects involving UI improvements, bug fixing, and deployment.",
+                "Actively exploring modern full-stack architecture and best practices."
+              ],
+              image: img0
+            }
+          ],
+          techStack: [
+            "Laravel", "Vue.js", "Inertia.js", "Tailwind CSS", "Sanctum", "Chart.js", "Postman", "GitHub"
+          ]
+        },
         {
           role: "Software Engineer & Trainer",
           company: "RTSoft Solutions LLP, Gondia",
-          period: "2022 – Present",
+          period: "2022 – 2025",
           website: "https://rtsoftsolutions.com", // optional
           logo: "rtsoft-logo.png", // optional for UI
           details: [
             {
               heading:"📅 2025 – Enterprise App Development",
               points:[
-                "🏛️ Cooperative Society Bank Management System – Full-stack Laravel + MySQL system.",
+                "Cooperative Society Bank Management System – Full-stack Laravel + MySQL system.",
                 "Core Modules: Loan, Deposits, Shares, Passbooks, Reports, Vouchers.",
                 "Integrated cPanel deployments, role-based access control.",
                 "Assisted in real-time invigilation and technical support for 12th-grade IT practical exams at local schools.",
-                "Developed Vue.js personal portfolio from scratch.",
                 "Incorporated AI-assisted development practices to enhance productivity and explore alternate solutions."
               ],
-              image: "../assets/images/experience-image1.webp"
+              image: img1
             },
               {
                 heading:"📅 2024 – Real-World Project Exposure",
@@ -94,7 +142,7 @@ export default {
                   "👨‍💻 Online Examination System – Admin panel with Laravel.",
                   "Continued new-batch training cycles on HTML, CSS, and JS basics.",
                 ],
-                image:"../assets/images/experience-image2.webp"
+                image: img2
               },
     
                 {
@@ -104,7 +152,7 @@ export default {
                     "Conducted Linux basics & SQL query-building classes.",
                     "Git and GitHub practices introduced in training workflow.",
                   ],
-                  image:"../assets/images/experience-image3.webp"
+                  image: img3
                 },
                     {
                 heading:"👨‍🏫 Training & Mentorship",
@@ -113,7 +161,7 @@ export default {
                   "Mentored 70+ students in web development; enabled them to confidently create functional websites.",
                   "Created structured notes, tutorials, and practical projects for learners."
                     ],
-                    image:"../assets/images/experience-image4.webp"
+                    image: img4
                   },
                   
                   {
@@ -125,7 +173,7 @@ export default {
                     "Jul–Sep: Focused on UI/UX using Figma and responsive design.",
                     "Oct–Dec: Delivered modules on Office Tools, C, C++, Computer Fundamentals.",
                     ],
-                    image:"../assets/images/experience-image5.webp"
+                    image: img5
                   },
           ],
           techStack: [

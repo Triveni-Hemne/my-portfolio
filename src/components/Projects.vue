@@ -42,15 +42,27 @@
 </template>
 
 <script>
+import img0 from '@/assets/images/project-mini-bank.png'
+import img1 from '@/assets/images/project-cooperative-society.png'
+import img2 from '@/assets/images/project-it-online-examination.png'
+import img3 from '@/assets/images/project-portfolio-site.png'
 export default {
   name: 'Projects',
   data() {
     return {
       projects: [
         {
+          title: "Mini Bank System",
+          description: "A modern full-stack banking application built using Laravel, Vue 3, and Inertia.js. It includes account management, transactions, dashboards, and financial reporting.",
+          image: img0,
+          github: "https://github.com/Triveni-Hemne/mini-bank", // Not public
+          demo: "",   // Not public
+          note: "Personal project built to practice real-world banking system architecture and modern full-stack development."
+        },
+        {
           title: "Cooperative Society Management System",
           description: "A full-stack internal tool built with Laravel to manage member accounts, daily transactions, financial reports, passbooks, and administrative controls.",
-          image: "../assets/images/project-cooperative-society.png",
+          image: img1,
           github: "", // Not public
           demo: "",   // Not public
           note: "Developed as part of my role at RTSoft Solutions. Code and demo are not publicly available due to company confidentiality."
@@ -58,19 +70,27 @@ export default {
         {
           title: "IT Online Examination System",
           description: "A Laravel-based backend system that enables IT students to participate in online exams, with features like question banks, scoring logic, and result tracking.",
-          image: "../assets/images/project-it-online-examination.png",
+          image: img2,
           github: "", // Not public
           demo: "",   // Not public
           note: "Developed as part of my role at RTSoft Solutions. Code and demo are not publicly available due to company confidentiality."
         },
         {
+          title: "Freelance / Client Projects",
+          description: "Worked on real-world production applications involving UI improvements, bug fixing, content updates, and deployment support.",
+          image: img1,
+          github: "", // Not public
+          demo: "",   // Not public
+          note: "Includes multiple client projects. Links are not public due to client privacy."
+        },
+        {
           title: "Portfolio Website",
           description: "A personal portfolio built using Vue.js and Tailwind CSS, showcasing selected projects, work experience, and contact information.",
-          image: "../assets/images/project-portfolio-site.png",
-          github: "",
-          demo: "#", // Replace with actual portfolio site URL when ready
-          note: "Source code is private. Available upon request."
-        }
+          image: img3,
+          github: "https://github.com/Triveni-Hemne/my-portfolio",
+          demo: "https://triveni-hemne.github.io/my-portfolio/", // Replace with actual portfolio site URL when ready
+          note: "Live demo available. Source code can be shared upon request."
+        },
       ]
     };
   }

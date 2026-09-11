@@ -23,7 +23,7 @@
       <!-- Image or Illustration -->
       <div class="flex-1">
         <img
-          :src="('../assets/images/hero-developer-illustration.png')"
+          :src="heroDeveloperIllustration"
           alt="Developer Illustration"
           class="w-full max-w-sm mx-auto"
         />
@@ -34,9 +34,15 @@
 
 <script>
 import BaseButton from './Button.vue';
+import heroDeveloperIllustration from '@/assets/images/hero-developer-illustration.png'
 export default {
   components: {
     BaseButton
+  },
+  data() {
+    return {
+      heroDeveloperIllustration // ✅ expose to template
+    }
   }
 }
 </script>
