@@ -17,7 +17,7 @@
           About Me
         </h2>
         <p class="text-slate-600 text-lg leading-relaxed">
-          I'm a <span class="font-medium text-cyan-600">Software Engineer</span> with 3+ years of experience crafting modern web applications using
+          I'm a <span class="font-medium text-cyan-600">Software Engineer</span> with 4+ years of experience crafting modern web applications using
           <strong class="text-cyan-600"> Laravel </strong> and
           <strong class="text-cyan-600"> Vue.js</strong>. Passionate about clean code, UI/UX, and solving real-world problems with elegant web solutions.
         </p>
